@@ -1,0 +1,14 @@
+from flask import Flask
+
+app = Flask(__name__)
+
+# Home Route
+@app.route("/")
+def home():
+    return {
+        "success": True,
+        "message": "AI Service Running 🚀"
+    }
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001, debug=True)
