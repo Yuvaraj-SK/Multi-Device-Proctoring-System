@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login as loginUser } from '../../services/authservice';
 
-function Login() {
+function Register() {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [formData, setFormData] = useState({ name: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -20,8 +20,8 @@ function Login() {
         setLoading(true);
 
         // Validation
-        if (!formData.email || !formData.password) {
-            setError('Email and password are required');
+        if (!formData.name || !formData.password) {
+            setError('Name, Email, Password and Confirm Password are required');
             setLoading(false);
             return;
         }
@@ -41,10 +41,10 @@ function Login() {
                     navigate('/candidate/dashboard');
                 }
             } else {
-                setError(response.message || 'Login failed');
+                setError(response.message || 'Register failed');
             }
         } catch (err) {
-            setError(err.response?.data?.message || 'Login failed. Please try again.');
+            setError(err.response?.data?.message || 'Register failed. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -68,8 +68,8 @@ function Login() {
                 boxShadow: '0 12px 35px rgba(15, 23, 42, 0.12)',
                 padding: '32px'
             }}>
-                <h2 style={{ margin: '0 0 8px', textAlign: 'center', color: '#111827' }}>Welcome Back</h2>
-                <p style={{ margin: '0 0 24px', textAlign: 'center', color: '#64748b' }}>Sign in to your account</p>
+                <h2 style={{ margin: '0 0 8px', textAlign: 'center', color: '#111827' }}>Create Account</h2>
+                <p style={{ margin: '0 0 24px', textAlign: 'center', color: '#64748b' }}>Join the platform</p>
 
                 {error && (
                     <div style={{
@@ -89,11 +89,11 @@ function Login() {
                     <label style={{ display: 'block', marginBottom: '14px' }}>
                         <span style={{ display: 'block', marginBottom: '6px', color: '#334155', fontWeight: 600 }}>Email</span>
                         <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
+                            type="name"
+                            name="name"
+                            value={formData.name}
                             onChange={handleChange}
-                            placeholder="Enter your email"
+                            placeholder="Enter your name"
                             disabled={loading}
                             style={{
                                 width: '100%',
@@ -143,7 +143,7 @@ function Login() {
                             transition: 'all 0.3s ease'
                         }}
                     >
-                        {loading ? 'Logging in...' : 'Login'}
+                        {loading ? 'Logging in...' : 'Register'}
                     </button>
                 </form>
 
@@ -155,4 +155,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;
